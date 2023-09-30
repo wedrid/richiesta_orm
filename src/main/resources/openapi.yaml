@@ -1,0 +1,143 @@
+openapi: 3.0.0
+info:
+  title: API Gateway
+  version: 1.0.0
+  description: API Gateway for managing requests
+
+paths:
+  /clients:
+    get: 
+      summary: Get all clients
+      operationId: getAllClients
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create a new request
+      operationId: addNewClient
+      responses: 
+        '201':
+          description: Created
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
+      
+  /reqapi/clients/{clientId}:
+    get:
+      summary: Get a request by ID
+      operationId: getClientById
+      parameters:
+        - in: path
+          name: clientId
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Request not found
+    put:
+      summary: Update a client
+      operationId: updateClientById
+      parameters:
+        - in: path
+          name: clientId
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Request not found
+    delete:
+      summary: Delete a request
+      operationId: deleteClientById
+      parameters:
+        - in: path
+          name: clientId
+          schema:
+            type: integer
+          required: true
+      responses:
+        '204':
+          description: No Content
+
+  /reqapi/requests/open:
+    get: 
+      summary: Get all open requests
+      operationId: getAllOpenRequests
+      responses:
+        '200':
+          description: OK
+      
+  /reqapi/requests:
+    get:
+      summary: Get all requests
+      operationId: getAllRequests
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create a new request
+      operationId: createNewRequest
+      responses:
+        '201':
+          description: Created
+  /reqapi/requests/{requestId}:
+    get:
+      summary: Get a request by ID
+      operationId: getRequestById
+      parameters:
+        - in: path
+          name: requestId
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Request not found
+    put:
+      summary: Update a request
+      operationId: updateRequestById
+      parameters:
+        - in: path
+          name: requestId
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Request not found
+    delete:
+      summary: Delete a request
+      operationId: deleteRequestById
+      parameters:
+        - in: path
+          name: requestId
+          schema:
+            type: integer
+          required: true
+      responses:
+        '204':
+          description: No Content
+
+components:
+  schemas:
+    Request:
+      type: object
+      properties:
+        id:
+          type: integer
+        # Add other properties for request
+    Client: 
+      type: object
+      properties: 
+        id: 
+          type: integer
