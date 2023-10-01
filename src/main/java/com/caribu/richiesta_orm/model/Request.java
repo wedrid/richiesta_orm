@@ -17,9 +17,9 @@ public class Request {
     private Integer idCliente;
     private Integer idOperativo; 
     private boolean accepted;
-    @ManyToOne @JoinColumn(name="projectId", nullable=true)
+    @ManyToOne @JoinColumn(name="trattaId", nullable=true)
     private Tratta tratta;
-
+    private LocalDateTime dataInserimento;
 
     public boolean isAccepted() {
         return accepted;
@@ -28,8 +28,6 @@ public class Request {
     public void setAccepted(boolean accepted) {
         this.accepted = accepted;
     }
-
-    private LocalDateTime dataInserimento;
 
     public void setId(Integer id){
         this.id = id;
@@ -69,9 +67,4 @@ public class Request {
     public void setTratta(Tratta tratta) {
         this.tratta = tratta;
     }
-
-    
-
-    
-
 }
