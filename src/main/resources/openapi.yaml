@@ -5,6 +5,13 @@ info:
   description: API Gateway for managing requests
 
 paths:
+  /ping: 
+    get: 
+      summary: ping
+      operationId: ping
+      responses:
+        '200':
+          description: OK
   /clients:
     get: 
       summary: Get all clients
@@ -13,7 +20,7 @@ paths:
         '200':
           description: OK
     post:
-      summary: Create a new request
+      summary: Add new client
       operationId: addNewClient
       responses: 
         '201':
