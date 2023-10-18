@@ -8,9 +8,11 @@ import com.hazelcast.client.config.ClientConfig;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
+import io.vertx.core.http.HttpServer;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
+import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.ext.web.openapi.RouterBuilder;
 import io.vertx.sqlclient.Pool;
 
@@ -19,9 +21,30 @@ public class RestApiVerticle extends AbstractVerticle{
     public static final int HTTP_PORT = 10001;
     @Override
     public void start(final Promise<Void> startPromise) throws Exception {
-            startHttpServerAndAttachRoutes(startPromise);
+        // HttpServer server = vertx.createHttpServer();
+        // Router router = Router.router(vertx);
+        // router.route("/*").handler(BodyHandler.create());
+
+        // router.get("/ping").handler(context -> {
+        //     context.response().end(new JsonObject().put("message", "pong").toString());
+        //   });
+
+        // router.post("/clients").handler(context -> {
+        //     String body = context.body().asString();
+        //     System.out.println(body);
+        //     /* 
+        //     JsonObject body = context.getBodyAsJson();
+        //     System.out.println(body.toString());
+        //     */
+        //     context.response().setStatusCode(201).end(new JsonObject().put("message", "pong").toString());
+        // });
+        // server.requestHandler(router).listen(HTTP_PORT).onSuccess(result -> startPromise.complete())
+        //     .onFailure(err -> startPromise.fail(err));
+        startHttpServerAndAttachRoutes(startPromise);
+        
     }
 
+    //il successivo è per openAPI ma mi sta dando problemi, provo prima strada senza, poi vediamo
     private void startHttpServerAndAttachRoutes(Promise<Void> startPromise) {
         System.out.println("Hello verticle ################");
         RouterBuilder.create(vertx, "openapi.yaml")
@@ -29,8 +52,18 @@ public class RestApiVerticle extends AbstractVerticle{
                 routerBuilder.operation("ping").handler( h -> {
                     h.response().end(new JsonObject().put("message", "ping pong").toString());
                 });
-                routerBuilder.operation("addNewClient").handler(new AddNewClientHandler()); 
+                routerBuilder.operation("addNewClient").handler(context ->  {
+                    System.out.println("Pre body handler");
+                    
+                    String body = context.body().asString();
+                    System.out.println("miao");
+                    System.out.println(body);
+                    
+                    context.response().end(new JsonObject().put("message", "OK").toString());
+                });
+            
                 routerBuilder.operation("getAllClients").handler( h -> {}); 
+
                 Router restApi = routerBuilder.createRouter();
 
                 //Create HTTP server and attach routes

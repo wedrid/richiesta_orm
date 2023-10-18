@@ -14,7 +14,6 @@ import io.vertx.spi.cluster.hazelcast.HazelcastClusterManager;
 
 public class MainVerticle extends AbstractVerticle {
 
-
   private static final Logger LOG = LoggerFactory.getLogger(MainVerticle.class);
   public static final int PORT = 10001;
   public static final int PROCESSORS = 1; //Runtime.getRuntime().availableProcessors();
@@ -28,11 +27,11 @@ public class MainVerticle extends AbstractVerticle {
   private Future<String> deployRestApiVerticle(Promise<Void> startPromise) {
     return vertx.deployVerticle(RestApiVerticle.class.getName(),
     new DeploymentOptions().setInstances(PROCESSORS))
-    .onFailure(startPromise::fail)
-    .onSuccess(id -> {
-      LOG.info("Deployed {} with id {}", RestApiVerticle.class.getSimpleName(), id);
-      startPromise.complete();
-    });
+      .onFailure(startPromise::fail)
+      .onSuccess(id -> {
+        LOG.info("Deployed {} with id {}", RestApiVerticle.class.getSimpleName(), id);
+        startPromise.complete();
+      });
   }
 
   public static void main(String[] args) {
