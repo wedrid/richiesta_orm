@@ -3,7 +3,7 @@ package com.caribu.richiesta_orm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.caribu.richiesta_orm.handlers.AddNewClientHandler;
+import com.caribu.richiesta_orm.handlers.AddNewTrattaHandler;
 import com.hazelcast.client.config.ClientConfig;
 
 import io.vertx.core.AbstractVerticle;
@@ -19,6 +19,11 @@ import io.vertx.sqlclient.Pool;
 public class RestApiVerticle extends AbstractVerticle{
     private static final Logger LOG = LoggerFactory.getLogger(RestApiVerticle.class);
     public static final int HTTP_PORT = 10001;
+
+    public RestApiVerticle(String name){
+        System.out.println("Hello verticle #######" + name);
+    }
+
     @Override
     public void start(final Promise<Void> startPromise) throws Exception {
         // HttpServer server = vertx.createHttpServer();
@@ -50,19 +55,11 @@ public class RestApiVerticle extends AbstractVerticle{
         RouterBuilder.create(vertx, "openapi.yaml")
             .onSuccess(routerBuilder -> {
                 routerBuilder.operation("ping").handler( h -> {
-                    h.response().end(new JsonObject().put("message", "ping pong").toString());
+                    h.response().end(new JsonObject().put("message", "ping pong ####").toString());
                 });
-                routerBuilder.operation("addNewClient").handler(context ->  {
-                    System.out.println("Pre body handler");
-                    
-                    String body = context.body().asString();
-                    System.out.println("miao");
-                    System.out.println(body);
-                    
-                    context.response().end(new JsonObject().put("message", "OK").toString());
-                });
-            
-                routerBuilder.operation("getAllClients").handler( h -> {}); 
+                routerBuilder.operation("addNewTratta").handler(new AddNewTrattaHandler());
+                
+                
 
                 Router restApi = routerBuilder.createRouter();
 

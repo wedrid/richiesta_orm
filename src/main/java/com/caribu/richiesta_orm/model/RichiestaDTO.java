@@ -2,14 +2,14 @@ package com.caribu.richiesta_orm.model;
 
 import java.time.LocalDateTime;
 
-public class RequestDTO {
+public class RichiestaDTO {
     private Integer id;
     private Integer idCliente;
     private Integer idOperativo;
     private boolean accepted;
     private LocalDateTime createdAt;
 
-    public RequestDTO(Integer id, Integer idCliente, Integer idOperativo, boolean accepted, LocalDateTime createdAt) {
+    public RichiestaDTO(Integer id, Integer idCliente, Integer idOperativo, boolean accepted, LocalDateTime createdAt) {
         this.id = id;
         this.idCliente = idCliente;
         this.idOperativo = idOperativo;

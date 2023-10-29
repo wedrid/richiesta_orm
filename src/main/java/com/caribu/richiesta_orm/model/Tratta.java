@@ -13,8 +13,11 @@ import jakarta.persistence.Id;
 public class Tratta {
     @Id @GeneratedValue
     private Integer id;
-    private Float lat;
-    private Float lon;
+    private Float originLat;
+    private Float originLon;
+
+    private Float destLat; 
+    private Float destLon;
     private LocalDateTime dataInserimento;
     // because tratta does not have to be aware of the requests, no hibernate association, not variable is needed (and wanted)
     public Integer getId() {
@@ -23,18 +26,31 @@ public class Tratta {
     public void setId(Integer id) {
         this.id = id;
     }
-    public Float getLat() {
-        return lat;
+    public Float getoriginLat() {
+        return originLat;
     }
-    public void setLat(Float lat) {
-        this.lat = lat;
+    public void setoriginLat(Float originLat) {
+        this.originLat = originLat;
     }
-    public Float getLon() {
-        return lon;
+    public Float getoriginLon() {
+        return originLon;
     }
-    public void setLon(Float lon) {
-        this.lon = lon;
+    public void setoriginLon(Float originLon) {
+        this.originLon = originLon;
     }
+    public Float getdestLat() {
+        return destLat;
+    }
+    public void setdestLat(Float destLat) {
+        this.destLat = destLat;
+    }
+    public Float getdestLon() {
+        return destLon;
+    }
+    public void setdestLon(Float destLon) {
+        this.destLon = destLon;
+    }
+
     public LocalDateTime getDataInserimento() {
         return dataInserimento;
     }

@@ -12,65 +12,6 @@ paths:
       responses:
         '200':
           description: OK
-  /clients:
-    get: 
-      summary: Get all clients
-      operationId: getAllClients
-      responses:
-        '200':
-          description: OK
-    post:
-      summary: Add new client
-      operationId: addNewClient
-      responses: 
-        '201':
-          description: Created
-        '400':
-          description: Bad request
-        '500':
-          description: Internal server error
-      
-  /reqapi/clients/{clientId}:
-    get:
-      summary: Get a request by ID
-      operationId: getClientById
-      parameters:
-        - in: path
-          name: clientId
-          schema:
-            type: integer
-          required: true
-      responses:
-        '200':
-          description: OK
-        '404':
-          description: Request not found
-    put:
-      summary: Update a client
-      operationId: updateClientById
-      parameters:
-        - in: path
-          name: clientId
-          schema:
-            type: integer
-          required: true
-      responses:
-        '200':
-          description: OK
-        '404':
-          description: Request not found
-    delete:
-      summary: Delete a request
-      operationId: deleteClientById
-      parameters:
-        - in: path
-          name: clientId
-          schema:
-            type: integer
-          required: true
-      responses:
-        '204':
-          description: No Content
 
   /reqapi/requests/open:
     get: 
@@ -134,6 +75,21 @@ paths:
       responses:
         '204':
           description: No Content
+  /reqapi/tratta:
+    get:
+      summary: Get all tratta
+      operationId: getAllTratta
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create a new tratta
+      operationId: addNewTratta
+      responses:
+        '201':
+          description: Created
+   
+      
 
 components:
   schemas:

@@ -2,27 +2,27 @@ package com.caribu.richiesta_orm.data;
 
 import java.util.Optional;
 
-import com.caribu.richiesta_orm.model.RequestDTO;
-import com.caribu.richiesta_orm.model.RequestsList;
+import com.caribu.richiesta_orm.model.RichiestaDTO;
+import com.caribu.richiesta_orm.model.RichiestaList;
 
 import io.vertx.core.Future;
 
-public class RequestRepositoryImpl implements RequestRepository{
+public class RichiestaRepositoryImpl implements RichiestaRepository{
 
     @Override
-    public Future<RequestDTO> createRequest(RequestDTO requestDTO) {
+    public Future<RichiestaDTO> createRequest(RichiestaDTO RichiestaDTO) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'createRequest'");
     }
 
     @Override
-    public Future<RequestDTO> updateRequest(RequestDTO requestDTO) {
+    public Future<RichiestaDTO> updateRequest(RichiestaDTO RichiestaDTO) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updateRequest'");
     }
 
     @Override
-    public Future<Optional<RequestDTO>> findRequestById(Integer id) {
+    public Future<Optional<RichiestaDTO>> findRequestById(Integer id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findRequestById'");
     }
@@ -34,7 +34,7 @@ public class RequestRepositoryImpl implements RequestRepository{
     }
 
     @Override
-    public Future<RequestsList> findRequestByClientId(Integer clientId) {
+    public Future<RichiestaList> findRequestByClientId(Integer clientId) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findRequestByClientId'");
     }

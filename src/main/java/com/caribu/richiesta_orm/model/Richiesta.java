@@ -10,8 +10,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "request")
-public class Request {
+@Table(name = "richiesta")
+public class Richiesta {
     @Id @GeneratedValue
     private Integer id;
     private Integer idCliente;
