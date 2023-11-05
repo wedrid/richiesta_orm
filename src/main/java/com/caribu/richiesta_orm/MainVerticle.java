@@ -23,6 +23,9 @@ public class MainVerticle extends AbstractVerticle {
   private static final Logger LOG = LoggerFactory.getLogger(MainVerticle.class);
   public static final int PORT = 10001;
   public static final int PROCESSORS = 1; //Runtime.getRuntime().availableProcessors();
+  private static ServiceRegistry serviceRegistry;
+  private static Stage.SessionFactory sessionFactory;
+
   @Override
   public void start(Promise<Void> startPromise) throws Exception {
     //TODO: check correctness
@@ -31,7 +34,7 @@ public class MainVerticle extends AbstractVerticle {
   }
 
   private Future<String> deployRestApiVerticle(Promise<Void> startPromise) {
-    RestApiVerticle restApiVerticle = new RestApiVerticle("Ciao");
+    RestApiVerticle restApiVerticle = new RestApiVerticle("Ciao", sessionFactory);
     return vertx.deployVerticle(restApiVerticle,
     new DeploymentOptions().setInstances(PROCESSORS))
       .onFailure(startPromise::fail)
@@ -59,17 +62,17 @@ public class MainVerticle extends AbstractVerticle {
     //hibernateProps.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL95Dialect");
     Configuration hibernateConfiguration = new Configuration();
     hibernateConfiguration.setProperties(hibernateProps);
-    hibernateConfiguration.addAnnotatedClass(Tratta.class);
+    //add annotated classes
+    hibernateConfiguration.addAnnotatedClass(Tratta.class); 
     hibernateConfiguration.addAnnotatedClass(Richiesta.class);
 
     // 2. Session factroy
-    ServiceRegistry serviceRegistry = new ReactiveServiceRegistryBuilder()
+    serviceRegistry = new ReactiveServiceRegistryBuilder()
       .applySettings(hibernateConfiguration.getProperties()).build();
-    Stage.SessionFactory sessionFactory = hibernateConfiguration
+    sessionFactory = hibernateConfiguration
       .buildSessionFactory(serviceRegistry).unwrap(Stage.SessionFactory.class);
 
     // 3. Instanciate tratta and inject the session factory TODO:
-    
 
     // 4. Instanciate richiesta (and do DI) TODO:
 

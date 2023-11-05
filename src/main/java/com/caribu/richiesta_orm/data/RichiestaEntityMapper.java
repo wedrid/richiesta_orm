@@ -17,5 +17,4 @@ public class RichiestaEntityMapper implements Function<RichiestaDTO, Richiesta>{
         request.setDataInserimento(reqDTO.getCreatedAt());
         return request;
     }
-    
 }

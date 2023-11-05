@@ -1,9 +1,13 @@
 package com.caribu.richiesta_orm;
 
+import org.hibernate.reactive.stage.Stage.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.caribu.richiesta_orm.handlers.AddNewTrattaHandler;
+import com.caribu.richiesta_orm.handlers.TrattaController;
+import com.caribu.richiesta_orm.service.RichiestaService;
+import com.caribu.richiesta_orm.service.TrattaService;
 import com.hazelcast.client.config.ClientConfig;
 
 import io.vertx.core.AbstractVerticle;
@@ -12,6 +16,7 @@ import io.vertx.core.http.HttpServer;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
+import io.vertx.ext.web.Session;
 import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.ext.web.openapi.RouterBuilder;
 import io.vertx.sqlclient.Pool;
@@ -19,9 +24,16 @@ import io.vertx.sqlclient.Pool;
 public class RestApiVerticle extends AbstractVerticle{
     private static final Logger LOG = LoggerFactory.getLogger(RestApiVerticle.class);
     public static final int HTTP_PORT = 10001;
+    private SessionFactory sessionFactory;
+    private TrattaService trattaService;
+    private RichiestaService richiestaService;
 
-    public RestApiVerticle(String name){
+    public RestApiVerticle(String name, SessionFactory sessionFactory){
+        this.sessionFactory = sessionFactory;
         System.out.println("Hello verticle #######" + name);
+        //Inject SessionFactories
+        trattaService = new TrattaService(sessionFactory); 
+        richiestaService = new RichiestaService(sessionFactory);
     }
 
     @Override
@@ -45,6 +57,7 @@ public class RestApiVerticle extends AbstractVerticle{
         // });
         // server.requestHandler(router).listen(HTTP_PORT).onSuccess(result -> startPromise.complete())
         //     .onFailure(err -> startPromise.fail(err));
+        System.out.println("Starting http server and attaching routes");
         startHttpServerAndAttachRoutes(startPromise);
         
     }
@@ -57,8 +70,11 @@ public class RestApiVerticle extends AbstractVerticle{
                 routerBuilder.operation("ping").handler( h -> {
                     h.response().end(new JsonObject().put("message", "ping pong ####").toString());
                 });
-                routerBuilder.operation("addNewTratta").handler(new AddNewTrattaHandler());
+                //Posso fare qui le DI nel costruttore
                 
+                TrattaController trattaController = new TrattaController(trattaService);
+
+                routerBuilder.operation("addNewTratta").handler(ctx -> trattaController.addNewTratta(ctx));
                 
 
                 Router restApi = routerBuilder.createRouter();

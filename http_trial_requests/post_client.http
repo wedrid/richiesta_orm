@@ -1,6 +1,10 @@
-POST http://127.0.0.1:10001/clients HTTP/1.1
+POST http://127.0.0.1:10001/reqapi/tratta HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "pippo"
+    "name": "pippo",
+    "orig_lat": 45.0,
+    "orig_lon": 11.0,
+    "dest_lat": 44.0,
+    "dest_lon": 9.0
 }

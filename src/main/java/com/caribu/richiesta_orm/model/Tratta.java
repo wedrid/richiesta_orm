@@ -26,16 +26,16 @@ public class Tratta {
     public void setId(Integer id) {
         this.id = id;
     }
-    public Float getoriginLat() {
+    public Float getorigLat() {
         return originLat;
     }
-    public void setoriginLat(Float originLat) {
+    public void setorigLat(Float originLat) {
         this.originLat = originLat;
     }
-    public Float getoriginLon() {
+    public Float getorigLon() {
         return originLon;
     }
-    public void setoriginLon(Float originLon) {
+    public void setorigLon(Float originLon) {
         this.originLon = originLon;
     }
     public Float getdestLat() {
@@ -58,6 +58,4 @@ public class Tratta {
         this.dataInserimento = dataInserimento;
     }
     
-    
-
 }

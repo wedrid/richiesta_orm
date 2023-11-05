@@ -7,11 +7,12 @@ import io.vertx.ext.web.RoutingContext;
 public class AddNewTrattaHandler implements Handler<RoutingContext>{
     @Override
     public void handle(RoutingContext context) {
-        System.out.println("Pre body handler");
+        // Questo lo chiamo handler, di fatto è il controller
+        // Per ora faccio tutto qua, poi TODO: da spezzettare 
+        
+        // per aggiungere una tratta ho il modell a cui servono: latitudine e longitudine di destinazione e origine
+        // e poi il nome della tratta (?)
         String body = context.body().asString();
-        System.out.println("miao");
-        System.out.println(body);
         context.response().end(new JsonObject().put("message", "OK").toString());
     }
-    
 }
