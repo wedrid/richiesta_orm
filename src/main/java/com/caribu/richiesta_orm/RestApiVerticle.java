@@ -73,8 +73,10 @@ public class RestApiVerticle extends AbstractVerticle{
                 //Posso fare qui le DI nel costruttore
                 
                 TrattaController trattaController = new TrattaController(trattaService);
+                RichiestaController richiestaController = new RichiestaController(controllerService);
 
                 routerBuilder.operation("addNewTratta").handler(ctx -> trattaController.addNewTratta(ctx));
+                routerBuilder.operation("createNewRichiesta").handler(ctx -> richiestaController.createNewRichiesta(ctx));
                 
 
                 Router restApi = routerBuilder.createRouter();

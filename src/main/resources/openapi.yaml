@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: API Gateway
   version: 1.0.0
-  description: API Gateway for managing requests
+  description: API Gateway for managing richieste
 
 paths:
   /ping: 
@@ -13,34 +13,34 @@ paths:
         '200':
           description: OK
 
-  /reqapi/requests/open:
+  /reqapi/richieste/open:
     get: 
-      summary: Get all open requests
-      operationId: getAllOpenRequests
+      summary: Get all open richieste
+      operationId: getAllOpenRichieste
       responses:
         '200':
           description: OK
       
-  /reqapi/requests:
+  /reqapi/richieste:
     get:
-      summary: Get all requests
-      operationId: getAllRequests
+      summary: Get all richieste
+      operationId: getAllRichieste
       responses:
         '200':
           description: OK
     post:
-      summary: Create a new request
-      operationId: createNewRequest
+      summary: Create a new richiesta
+      operationId: createNewRichiesta
       responses:
         '201':
           description: Created
-  /reqapi/requests/{requestId}:
+  /reqapi/richieste/{richiestaId}:
     get:
-      summary: Get a request by ID
-      operationId: getRequestById
+      summary: Get a richiesta by ID
+      operationId: getRichiestaById
       parameters:
         - in: path
-          name: requestId
+          name: richiestaId
           schema:
             type: integer
           required: true
@@ -48,13 +48,13 @@ paths:
         '200':
           description: OK
         '404':
-          description: Request not found
+          description: richiesta not found
     put:
-      summary: Update a request
-      operationId: updateRequestById
+      summary: Update a richiesta
+      operationId: updateRichiestaById
       parameters:
         - in: path
-          name: requestId
+          name: richiestaId
           schema:
             type: integer
           required: true
@@ -62,13 +62,13 @@ paths:
         '200':
           description: OK
         '404':
-          description: Request not found
+          description: richiesta not found
     delete:
-      summary: Delete a request
-      operationId: deleteRequestById
+      summary: Delete a richiesta
+      operationId: deleteRichiestaById
       parameters:
         - in: path
-          name: requestId
+          name: richiestaId
           schema:
             type: integer
           required: true
@@ -93,12 +93,12 @@ paths:
 
 components:
   schemas:
-    Request:
+    richiesta:
       type: object
       properties:
         id:
           type: integer
-        # Add other properties for request
+        # Add other properties for richiesta
     Client: 
       type: object
       properties: 
