@@ -60,6 +60,15 @@ public class Richiesta {
         this.dataInserimento = dataInserimento;
     }
 
+    public Integer getIdTratta() {
+        if(tratta == null){
+            return -1;
+        } else {
+            return tratta.getId();
+        }
+        
+    }
+
     public Tratta getTratta() {
         return tratta;
     }

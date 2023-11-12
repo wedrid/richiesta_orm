@@ -4,22 +4,17 @@ import org.hibernate.reactive.stage.Stage.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.caribu.richiesta_orm.handlers.AddNewTrattaHandler;
+import com.caribu.richiesta_orm.handlers.RichiestaController;
 import com.caribu.richiesta_orm.handlers.TrattaController;
 import com.caribu.richiesta_orm.service.RichiestaService;
 import com.caribu.richiesta_orm.service.TrattaService;
-import com.hazelcast.client.config.ClientConfig;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
-import io.vertx.core.http.HttpServer;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
-import io.vertx.ext.web.Session;
-import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.ext.web.openapi.RouterBuilder;
-import io.vertx.sqlclient.Pool;
 
 public class RestApiVerticle extends AbstractVerticle{
     private static final Logger LOG = LoggerFactory.getLogger(RestApiVerticle.class);
@@ -73,10 +68,10 @@ public class RestApiVerticle extends AbstractVerticle{
                 //Posso fare qui le DI nel costruttore
                 
                 TrattaController trattaController = new TrattaController(trattaService);
-                RichiestaController richiestaController = new RichiestaController(controllerService);
+                RichiestaController richiestaController = new RichiestaController(richiestaService, trattaService);
 
                 routerBuilder.operation("addNewTratta").handler(ctx -> trattaController.addNewTratta(ctx));
-                routerBuilder.operation("createNewRichiesta").handler(ctx -> richiestaController.createNewRichiesta(ctx));
+                routerBuilder.operation("createNewRichiesta").handler(ctx -> richiestaController.addRichiesta(ctx));
                 
 
                 Router restApi = routerBuilder.createRouter();

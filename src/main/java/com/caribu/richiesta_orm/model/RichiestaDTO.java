@@ -5,19 +5,73 @@ import java.time.LocalDateTime;
 public class RichiestaDTO {
     private Integer id;
     private Integer idCliente;
-    private Integer idTratta;
+    private Tratta tratta;
     private Integer idOperativo;
-    private boolean accepted;
-    private LocalDateTime createdAt;
 
-    public RichiestaDTO(Integer id, Integer idCliente, Integer idTratta, Integer idOperativo, boolean accepted, LocalDateTime createdAt) {
-        this.id = id;
+
+    private boolean accepted;
+
+    public RichiestaDTO(Integer id, Integer idCliente, Tratta tratta, Integer idOperativo, boolean accepted, LocalDateTime createdAt) {
         this.idCliente = idCliente;
-        this.idTratta = idTratta;
+        this.tratta = tratta;
         this.idOperativo = idOperativo;
         this.accepted = accepted;
         this.createdAt = createdAt;
+        System.out.println("DTO: id cliente " + idCliente + " id operativo " + idOperativo + " accepted " + accepted + " created at " + createdAt);
     }
+
+    public Tratta getTratta() {
+        return tratta;
+    }
+
+    public void setTratta(Tratta tratta) {
+        this.tratta = tratta;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(Integer idCliente) {
+        this.idCliente = idCliente;
+    }
+/* 
+    public Integer getIdTratta() {
+        return idTratta;
+    }
+
+    public void setIdTratta(Integer idTratta) {
+        this.idTratta = idTratta;
+    }
+*/
+
+    public Integer getIdOperativo() {
+        return idOperativo;
+    }
+
+    public void setIdOperativo(Integer idOperativo) {
+        this.idOperativo = idOperativo;
+    }
+
+    public boolean isAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(boolean accepted) {
+        this.accepted = accepted;
+    }
+
+    private LocalDateTime createdAt;
+
+    
 
     public LocalDateTime getCreatedAt() {
         return createdAt;

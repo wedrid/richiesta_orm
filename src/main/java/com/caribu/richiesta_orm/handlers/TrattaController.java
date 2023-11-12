@@ -22,6 +22,7 @@ public class TrattaController {
         JsonObject body = context.body().asJsonObject();
         System.out.println("Ecco il body: " + body.toString());
         TrattaDTO tratta = new TrattaDTO(
+            null,
             body.getFloat("orig_lat"), 
             body.getFloat("orig_lon"),
             body.getFloat("dest_lat"),

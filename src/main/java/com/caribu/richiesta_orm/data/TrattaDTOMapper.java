@@ -9,7 +9,7 @@ public class TrattaDTOMapper implements Function<Tratta, TrattaDTO> {
 
     @Override
     public TrattaDTO apply(Tratta t) {
-        return new TrattaDTO(t.getorigLat(), t.getorigLon(), t.getdestLat(), t.getdestLon(), t.getDataInserimento());
+        //TODO: change the first argument based on t.id()
+        return new TrattaDTO(null, t.getorigLat(), t.getorigLon(), t.getdestLat(), t.getdestLon(), t.getDataInserimento());
     }
-
 }

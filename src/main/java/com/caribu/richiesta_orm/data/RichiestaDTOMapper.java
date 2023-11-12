@@ -9,7 +9,12 @@ public class RichiestaDTOMapper implements Function<Richiesta, RichiestaDTO>{
 
     @Override
     public RichiestaDTO apply(Richiesta request) {
-        return new RichiestaDTO(request.getId(), request.getIdCliente(), request.getIdOperativo(), request.isAccepted(), request.getDataInserimento());
+        return new RichiestaDTO(
+            request.getId(),
+            request.getIdCliente(), 
+            request.getTratta(),
+            request.getIdOperativo(), 
+            request.isAccepted(), 
+            request.getDataInserimento());
     }
-    
 }

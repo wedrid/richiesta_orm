@@ -3,7 +3,7 @@ package com.caribu.richiesta_orm.model;
 import java.time.LocalDateTime;
 
 public class TrattaDTO {
-    //private Integer id;
+    private Integer id;
     private Float origLat;
     private Float origLon;
     public Float getOrigLat() {
@@ -55,8 +55,8 @@ public class TrattaDTO {
     }
     private Float destLon;
     private LocalDateTime dataInserimento;
-    public TrattaDTO(/*Integer id, */Float origLat, Float origLon, Float destLat, Float destLon, LocalDateTime dataInserimento) {
-        //this.id = id;
+    public TrattaDTO(Integer id, Float origLat, Float origLon, Float destLat, Float destLon, LocalDateTime dataInserimento) {
+        this.id = id;
         this.origLat = origLat;
         this.origLon = origLon;
         this.destLat = destLat; 
@@ -69,5 +69,17 @@ public class TrattaDTO {
     }
     public void setDataInserimento(LocalDateTime dataInserimento) {
         this.dataInserimento = dataInserimento;
+    }
+
+
+
+    public Integer getId() {
+        return id;
+    }
+
+
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
