@@ -37,6 +37,7 @@ public class TrattaService {
         future.onComplete(ar -> {
             if (ar.succeeded()) {
                 ar.result().ifPresent(tratta -> {
+                    // TODO: si ricomincia da qua
                     System.out.println("##**Retrieved Tratta with id: " + tratta.getId());
                 });
             } else {
