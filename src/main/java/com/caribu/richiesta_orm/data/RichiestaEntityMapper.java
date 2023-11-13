@@ -15,6 +15,7 @@ public class RichiestaEntityMapper implements Function<RichiestaDTO, Richiesta>{
         request.setIdOperativo(reqDTO.getIdOperativo());
         request.setAccepted(reqDTO.isAccepted());
         request.setDataInserimento(reqDTO.getCreatedAt());
+        request.setTratta(reqDTO.getTratta());
         return request;
     }
 }

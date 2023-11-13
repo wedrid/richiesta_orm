@@ -5,6 +5,6 @@ Content-Type: application/json
     "name": "pippo", 
     "cliente_id": 1, 
     "operativo_id": 1, 
-    "tratta_id": 251, 
+    "tratta_id": 301, 
     "accepted": false 
 }

@@ -21,4 +21,13 @@ public class RichiestaService {
         Future<RichiestaDTO> future = Future.fromCompletionStage(result).map(v -> dtoMapper.apply(richiestaEntity));
         return future;
     }
+    /* 
+    public Future<RichiestaDTO> addRichiesta(Richiesta richiesta) {
+        RichiestaDTO richiestaDTO = new RichiestaDTOMapper().apply(richiesta);
+        CompletionStage<Void> result = sessionFactory.withTransaction((s, t) -> s.persist(richiesta));
+        RichiestaDTOMapper dtoMapper = new RichiestaDTOMapper(); 
+        Future<RichiestaDTO> future = Future.fromCompletionStage(result).map(v -> dtoMapper.apply(richiesta));
+        return future;
+    }
+    */
 }

@@ -33,7 +33,7 @@ public class TrattaService {
         CompletionStage<Tratta> result = sessionFactory.withTransaction((s,t) -> s.find(Tratta.class, id));
         Future<Optional<Tratta>> future = Future.fromCompletionStage(result)
             .map(r -> Optional.ofNullable(r));
-
+        /* 
         future.onComplete(ar -> {
             if (ar.succeeded()) {
                 ar.result().ifPresent(tratta -> {
@@ -43,7 +43,7 @@ public class TrattaService {
             } else {
                 System.out.println("Retrieval failed: " + ar.cause().getMessage());
             }
-        });
+        });*/
 
         return future;
         ///

@@ -30,8 +30,9 @@ public class Richiesta {
     }
 
     public void setId(Integer id){
-        this.id = id;
+        //this.id = id;
     }
+
     public Integer getId(){
         return id;
     }

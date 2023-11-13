@@ -38,6 +38,30 @@ public class RichiestaController {
                     // TODO: Convert the trattaDTO into Tratta using the mapper, then add richiesta.. 
                     System.out.println("Tratta id: " + tratta.getId());
                     System.out.println("Tratta object: " + tratta.toString());
+                    RichiestaDTO richiestaDTO = new RichiestaDTO(
+                        null, //id 
+                        body.getInteger("cliente_id"), 
+                        tratta, //tratta TODO: add tratta 
+                        body.getInteger("operativo_id"), 
+                        false, //default accepted false, then can be accepted later 
+                        LocalDateTime.now() 
+                    );
+                    richiestaService.addRichiesta(richiestaDTO)
+                        .onSuccess(result -> {
+                            System.out.println("Successo");
+                            //JsonObject responseBody = JsonObject.mapFrom(result);
+                            System.out.println("Successo 2");
+                            //responseBody.put("Status", "Okay!!");
+                            System.out.println("Successo 3");
+                            //context.response().end(new JsonObject().put("message", "OK").toString());
+                            context.response().setStatusCode(201).end();
+                            })
+                        .onFailure(err -> {
+                            System.out.println("Errore");
+                            System.out.println(err.getMessage());
+                            context.response().setStatusCode(500).end();
+                            });
+
                 });
             } else {
                 // Handle the error

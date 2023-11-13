@@ -54,7 +54,6 @@ public class RestApiVerticle extends AbstractVerticle{
         //     .onFailure(err -> startPromise.fail(err));
         System.out.println("Starting http server and attaching routes");
         startHttpServerAndAttachRoutes(startPromise);
-        
     }
 
     //il successivo è per openAPI ma mi sta dando problemi, provo prima strada senza, poi vediamo
