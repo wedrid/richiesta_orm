@@ -4,8 +4,8 @@ import org.hibernate.reactive.stage.Stage.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.caribu.richiesta_orm.handlers.RichiestaController;
-import com.caribu.richiesta_orm.handlers.TrattaController;
+import com.caribu.richiesta_orm.controllers.RichiestaController;
+import com.caribu.richiesta_orm.controllers.TrattaController;
 import com.caribu.richiesta_orm.service.RichiestaService;
 import com.caribu.richiesta_orm.service.TrattaService;
 

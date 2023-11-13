@@ -1,4 +1,4 @@
-package com.caribu.richiesta_orm.handlers;
+package com.caribu.richiesta_orm.controllers;
 
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
