@@ -45,7 +45,7 @@ public class TrattaController {
                 System.out.println(err.getMessage());
                 context.response().setStatusCode(500).end();
                 });
-
+            
         //context.response().end(new JsonObject().put("message", "OK").toString());
     }
 

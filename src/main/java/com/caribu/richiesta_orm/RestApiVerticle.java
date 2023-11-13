@@ -11,6 +11,7 @@ import com.caribu.richiesta_orm.service.TrattaService;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
+import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
@@ -26,9 +27,12 @@ public class RestApiVerticle extends AbstractVerticle{
     public RestApiVerticle(String name, SessionFactory sessionFactory){
         this.sessionFactory = sessionFactory;
         System.out.println("Hello verticle #######" + name);
+
+        /* Injection is made in the start method BECAUSE we need the instanciated vertx object
         //Inject SessionFactories
-        trattaService = new TrattaService(sessionFactory); 
-        richiestaService = new RichiestaService(sessionFactory);
+        trattaService = new TrattaService(sessionFactory, vertx); 
+        richiestaService = new RichiestaService(sessionFactory); */
+        
     }
 
     @Override
@@ -52,6 +56,9 @@ public class RestApiVerticle extends AbstractVerticle{
         // });
         // server.requestHandler(router).listen(HTTP_PORT).onSuccess(result -> startPromise.complete())
         //     .onFailure(err -> startPromise.fail(err));
+        System.out.println("Injecting dependencies: ");
+        trattaService = new TrattaService(sessionFactory, vertx); 
+        richiestaService = new RichiestaService(sessionFactory);
         System.out.println("Starting http server and attaching routes");
         startHttpServerAndAttachRoutes(startPromise);
     }
@@ -65,6 +72,7 @@ public class RestApiVerticle extends AbstractVerticle{
                     h.response().end(new JsonObject().put("message", "ping pong ####").toString());
                 });
                 //Posso fare qui le DI nel costruttore
+                
                 
                 TrattaController trattaController = new TrattaController(trattaService);
                 RichiestaController richiestaController = new RichiestaController(richiestaService, trattaService);

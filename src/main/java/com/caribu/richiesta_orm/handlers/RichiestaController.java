@@ -9,6 +9,7 @@ import com.caribu.richiesta_orm.service.RichiestaService;
 import com.caribu.richiesta_orm.service.TrattaService;
 
 import io.vertx.core.Future;
+import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 
