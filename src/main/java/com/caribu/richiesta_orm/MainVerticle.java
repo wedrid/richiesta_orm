@@ -77,8 +77,10 @@ public class MainVerticle extends AbstractVerticle {
     // 4. Instanciate richiesta (and do DI) TODO:
 
     //DeploymentOptions options = new DeploymentOptions();
+    /* 
     JsonObject config = new JsonObject();
     config.put("port", 8888);
+    */
     //options.setConfig(config);
 
     // Deploy verticle

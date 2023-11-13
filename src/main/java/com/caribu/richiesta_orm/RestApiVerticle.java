@@ -24,6 +24,9 @@ public class RestApiVerticle extends AbstractVerticle{
     private TrattaService trattaService;
     private RichiestaService richiestaService;
 
+    private TrattaController trattaController;
+    private RichiestaController richiestaController;
+
     public RestApiVerticle(String name, SessionFactory sessionFactory){
         this.sessionFactory = sessionFactory;
         System.out.println("Hello verticle #######" + name);
@@ -74,8 +77,8 @@ public class RestApiVerticle extends AbstractVerticle{
                 //Posso fare qui le DI nel costruttore
                 
                 
-                TrattaController trattaController = new TrattaController(trattaService);
-                RichiestaController richiestaController = new RichiestaController(richiestaService, trattaService);
+                trattaController = new TrattaController(trattaService);
+                richiestaController = new RichiestaController(richiestaService, trattaService);
 
                 routerBuilder.operation("addNewTratta").handler(ctx -> trattaController.addNewTratta(ctx));
                 routerBuilder.operation("createNewRichiesta").handler(ctx -> richiestaController.addRichiesta(ctx));
