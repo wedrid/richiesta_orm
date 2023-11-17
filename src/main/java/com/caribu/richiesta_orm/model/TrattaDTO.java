@@ -2,6 +2,8 @@ package com.caribu.richiesta_orm.model;
 
 import java.time.LocalDateTime;
 
+import io.vertx.core.json.JsonObject;
+
 public class TrattaDTO {
     private Integer id;
     private Float origLat;
@@ -72,7 +74,6 @@ public class TrattaDTO {
     }
 
 
-
     public Integer getId() {
         return id;
     }
@@ -81,5 +82,16 @@ public class TrattaDTO {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public JsonObject toJson() {
+        JsonObject json = new JsonObject();
+        json.put("id", this.id);
+        json.put("origLat", this.origLat);
+        json.put("origLon", this.origLon);
+        json.put("destLat", this.destLat);
+        json.put("destLon", this.destLon);
+        json.put("dataInserimento", this.dataInserimento.toString());
+        return json;
     }
 }

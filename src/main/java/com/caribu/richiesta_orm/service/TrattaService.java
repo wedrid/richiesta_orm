@@ -12,6 +12,7 @@ import com.caribu.richiesta_orm.model.TrattaDTO;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
+import io.vertx.core.json.JsonObject;
 import io.vertx.core.net.impl.pool.Task;
 
 public class TrattaService {
@@ -27,10 +28,12 @@ public class TrattaService {
         Tratta trattaEntity = new TrattaEntityMapper().apply(trattaDTO);
         CompletionStage<Void> result = sessionFactory.withTransaction((s, t) -> s.persist(trattaEntity));
         TrattaDTOMapper dtoMapper = new TrattaDTOMapper();
-        Future<TrattaDTO> future = Future.fromCompletionStage(result).map(v -> dtoMapper.apply(trattaEntity));
+        Future<TrattaDTO> future = Future.fromCompletionStage(result)
+            .map(v -> dtoMapper.apply(trattaEntity));
         // when a tratta is added, notify the other microservice
         System.out.println("Sending message to added-tratta-address");
-        vertx.eventBus().send("added-tratta-address", "ecco la tratta lat: 42, lon: 11");
+        JsonObject message = trattaDTO.toJson();
+        vertx.eventBus().send("added-tratta-address", message);
         return future;
     }
 
