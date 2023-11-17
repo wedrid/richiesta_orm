@@ -5,6 +5,9 @@ import org.hibernate.reactive.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.caribu.richiesta_orm.model.Tratta;
+import com.hazelcast.config.Config;
+import com.hazelcast.config.JoinConfig;
+import com.hazelcast.config.NetworkConfig;
 import com.caribu.richiesta_orm.model.Richiesta;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
@@ -45,8 +48,8 @@ public class MainVerticle extends AbstractVerticle {
   }
 
   public static void main(String[] args) {
-    ClusterManager mgr = new HazelcastClusterManager();
-    VertxOptions options = new VertxOptions().setClusterManager(mgr);
+    //ClusterManager mgr = new HazelcastClusterManager();
+    //VertxOptions options = new VertxOptions().setClusterManager(mgr);
 
     // Hibernate and other configuration
 
@@ -82,6 +85,19 @@ public class MainVerticle extends AbstractVerticle {
     config.put("port", 8888);
     */
     //options.setConfig(config);
+    // Configure clustering
+    Config hazelcastConfig = new Config();
+    hazelcastConfig.getNetworkConfig().setPort(6000) // Set the initial port
+              .setPortAutoIncrement(true);
+
+    NetworkConfig networkConfig = hazelcastConfig.getNetworkConfig();
+
+    JoinConfig joinConfig = networkConfig.getJoin();
+    joinConfig.getMulticastConfig().setEnabled(false);
+    joinConfig.getTcpIpConfig().setEnabled(true).addMember("127.0.0.1");
+    // some configuration settings
+    ClusterManager mgr = new HazelcastClusterManager(hazelcastConfig);
+    VertxOptions options = new VertxOptions().setClusterManager(mgr);
 
     // Deploy verticle
     Vertx
