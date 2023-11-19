@@ -29,9 +29,9 @@ public class RestApiVerticle extends AbstractVerticle{
 
     public RestApiVerticle(String name, SessionFactory sessionFactory){
         this.sessionFactory = sessionFactory;
-        System.out.println("Hello verticle #######" + name);
+        System.out.println("Hello verticle #######" + name); // For debug purposes
 
-        /* Injection is made in the start method BECAUSE we need the instanciated vertx object
+        /* Injection is made in the "start" method BECAUSE we need the instanciated vertx object
         //Inject SessionFactories
         trattaService = new TrattaService(sessionFactory, vertx); 
         richiestaService = new RichiestaService(sessionFactory); */
@@ -60,7 +60,7 @@ public class RestApiVerticle extends AbstractVerticle{
         // server.requestHandler(router).listen(HTTP_PORT).onSuccess(result -> startPromise.complete())
         //     .onFailure(err -> startPromise.fail(err));
         System.out.println("Injecting dependencies: ");
-        trattaService = new TrattaService(sessionFactory, vertx); 
+        trattaService = new TrattaService(sessionFactory, vertx); // vertx dependency is needed for the event bus 
         richiestaService = new RichiestaService(sessionFactory);
         System.out.println("Starting http server and attaching routes");
         startHttpServerAndAttachRoutes(startPromise);
@@ -76,7 +76,7 @@ public class RestApiVerticle extends AbstractVerticle{
                 });
                 //Posso fare qui le DI nel costruttore
                 
-                
+                // qui definisco controllers per una questione di organizzazione logica del codice
                 trattaController = new TrattaController(trattaService);
                 richiestaController = new RichiestaController(richiestaService, trattaService);
 

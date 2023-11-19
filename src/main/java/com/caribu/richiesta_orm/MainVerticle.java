@@ -37,6 +37,8 @@ public class MainVerticle extends AbstractVerticle {
   }
 
   private Future<String> deployRestApiVerticle(Promise<Void> startPromise) {
+    // Simple deployment of RestApiVerticle
+    // Instanciate RestApiVerticle and inject sessionFactory dependency for hibernate
     RestApiVerticle restApiVerticle = new RestApiVerticle("Ciao", sessionFactory);
     return vertx.deployVerticle(restApiVerticle,
     new DeploymentOptions().setInstances(PROCESSORS))
@@ -74,24 +76,15 @@ public class MainVerticle extends AbstractVerticle {
       .applySettings(hibernateConfiguration.getProperties()).build();
     sessionFactory = hibernateConfiguration
       .buildSessionFactory(serviceRegistry).unwrap(Stage.SessionFactory.class);
-
-    // 3. Instanciate tratta and inject the session factory TODO:
-
-    // 4. Instanciate richiesta (and do DI) TODO:
-
-    //DeploymentOptions options = new DeploymentOptions();
-    /* 
-    JsonObject config = new JsonObject();
-    config.put("port", 8888);
-    */
-    //options.setConfig(config);
+    
     // Configure clustering
     Config hazelcastConfig = new Config();
-    hazelcastConfig.getNetworkConfig().setPort(6000) // Set the initial port
+    hazelcastConfig.getNetworkConfig().setPort(6000) // Set the initial port for clustering
               .setPortAutoIncrement(true);
 
     NetworkConfig networkConfig = hazelcastConfig.getNetworkConfig();
 
+    // Network configurations for discovery over TCP/IP instead of multicast
     JoinConfig joinConfig = networkConfig.getJoin();
     joinConfig.getMulticastConfig().setEnabled(false);
     joinConfig.getTcpIpConfig().setEnabled(true).addMember("127.0.0.1");
