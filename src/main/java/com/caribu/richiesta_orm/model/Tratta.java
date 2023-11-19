@@ -2,6 +2,7 @@ package com.caribu.richiesta_orm.model;
 
 import java.time.LocalDateTime;
 
+import io.vertx.core.json.JsonObject;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
@@ -56,6 +57,17 @@ public class Tratta {
     }
     public void setDataInserimento(LocalDateTime dataInserimento) {
         this.dataInserimento = dataInserimento;
+    }
+
+    public JsonObject toJson(){
+        JsonObject json = new JsonObject();
+        json.put("id", this.id);
+        json.put("originLat", this.originLat);
+        json.put("originLon", this.originLon);
+        json.put("destLat", this.destLat);
+        json.put("destLon", this.destLon);
+        json.put("dataInserimento", this.dataInserimento);
+        return json;
     }
     
 }

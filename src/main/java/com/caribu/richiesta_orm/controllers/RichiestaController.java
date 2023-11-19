@@ -96,4 +96,24 @@ public class RichiestaController {
                 context.response().setStatusCode(500).end();
                 });*/
     }
+
+    public void getRichiestaById(RoutingContext context){
+        Integer richiestaId = Integer.valueOf(context.pathParam("richiestaId"));
+        System.out.println("Getting righiesta of id: " + richiestaId);
+        richiestaService.getRichiestaById(richiestaId)
+            .onSuccess(result -> {
+                JsonObject body = result.toJson();
+                context.response().setStatusCode(200).end(body.encode());
+            })
+            .onFailure(err -> context.response().setStatusCode(500).end());
+
+        
+        // Integer userId = Integer.valueOf(context.pathParam("userId"));
+        // projectService.findProjectsByUser(userId)
+        // .onSuccess(result -> {
+        //   JsonObject body = JsonObject.mapFrom(result);
+        //   context.response().setStatusCode(200).end(body.encode());
+        // })
+        // .onFailure(err -> context.response().setStatusCode(500).end());
+    }
 }

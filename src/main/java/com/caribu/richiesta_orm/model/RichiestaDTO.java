@@ -2,6 +2,8 @@ package com.caribu.richiesta_orm.model;
 
 import java.time.LocalDateTime;
 
+import io.vertx.core.json.JsonObject;
+
 public class RichiestaDTO {
     private Integer id;
     private Integer idCliente;
@@ -79,5 +81,16 @@ public class RichiestaDTO {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public JsonObject toJson() {
+        JsonObject json = new JsonObject();
+        json.put("id", this.id);
+        json.put("idCliente", this.idCliente);
+        json.put("tratta", this.tratta.toJson());
+        json.put("idOperativo", this.idOperativo);
+        json.put("accepted", this.accepted);
+        json.put("createdAt", this.createdAt.toString());
+        return json;
     }
 }

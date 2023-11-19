@@ -82,6 +82,7 @@ public class RestApiVerticle extends AbstractVerticle{
 
                 routerBuilder.operation("addNewTratta").handler(ctx -> trattaController.addNewTratta(ctx));
                 routerBuilder.operation("createNewRichiesta").handler(ctx -> richiestaController.addRichiesta(ctx));
+                routerBuilder.operation("getRichiestaById").handler(ctx -> richiestaController.getRichiestaById(ctx));
                 
 
                 Router restApi = routerBuilder.createRouter();

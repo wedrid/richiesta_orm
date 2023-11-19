@@ -1,4 +1,5 @@
 package com.caribu.richiesta_orm.service;
+import java.util.Optional;
 import java.util.concurrent.CompletionStage;
 import org.hibernate.reactive.stage.Stage.SessionFactory;
 import com.caribu.richiesta_orm.data.RichiestaDTOMapper;
@@ -21,13 +22,15 @@ public class RichiestaService {
         Future<RichiestaDTO> future = Future.fromCompletionStage(result).map(v -> dtoMapper.apply(richiestaEntity));
         return future;
     }
-    /* 
-    public Future<RichiestaDTO> addRichiesta(Richiesta richiesta) {
-        RichiestaDTO richiestaDTO = new RichiestaDTOMapper().apply(richiesta);
-        CompletionStage<Void> result = sessionFactory.withTransaction((s, t) -> s.persist(richiesta));
+
+    public Future<RichiestaDTO> getRichiestaById(Integer id) {
+        CompletionStage<Richiesta> result = sessionFactory.withSession(s -> s.find(Richiesta.class, id));
+        System.out.println("Pippo");
         RichiestaDTOMapper dtoMapper = new RichiestaDTOMapper(); 
-        Future<RichiestaDTO> future = Future.fromCompletionStage(result).map(v -> dtoMapper.apply(richiesta));
+        System.out.println("Pluto");
+        Future<RichiestaDTO> future = Future.fromCompletionStage(result).map(v -> dtoMapper.apply(v));
+        System.out.println("Paperino");
         return future;
     }
-    */
+
 }
