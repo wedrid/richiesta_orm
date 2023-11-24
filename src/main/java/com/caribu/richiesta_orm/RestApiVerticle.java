@@ -16,11 +16,15 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.openapi.RouterBuilder;
+import io.vertx.servicediscovery.ServiceDiscovery;
+import io.vertx.servicediscovery.types.HttpEndpoint;
 
 public class RestApiVerticle extends AbstractVerticle{
     private static final Logger LOG = LoggerFactory.getLogger(RestApiVerticle.class);
     public static final int HTTP_PORT = 10001;
     private SessionFactory sessionFactory;
+    private ServiceDiscovery discovery;
+
     private TrattaService trattaService;
     private RichiestaService richiestaService;
 
@@ -30,7 +34,6 @@ public class RestApiVerticle extends AbstractVerticle{
     public RestApiVerticle(String name, SessionFactory sessionFactory){
         this.sessionFactory = sessionFactory;
         System.out.println("Hello verticle #######" + name); // For debug purposes
-
         /* Injection is made in the "start" method BECAUSE we need the instanciated vertx object
         //Inject SessionFactories
         trattaService = new TrattaService(sessionFactory, vertx); 
@@ -59,6 +62,8 @@ public class RestApiVerticle extends AbstractVerticle{
         // });
         // server.requestHandler(router).listen(HTTP_PORT).onSuccess(result -> startPromise.complete())
         //     .onFailure(err -> startPromise.fail(err));
+        System.out.println("Instanciated service discovery");
+        discovery = ServiceDiscovery.create(vertx);
         System.out.println("Injecting dependencies: ");
         trattaService = new TrattaService(sessionFactory, vertx); // vertx dependency is needed for the event bus 
         richiestaService = new RichiestaService(sessionFactory);
@@ -90,13 +95,25 @@ public class RestApiVerticle extends AbstractVerticle{
                 //Create HTTP server and attach routes
                 vertx.createHttpServer()
                     .requestHandler(restApi)
-                    .listen(HTTP_PORT, ar -> {
-                        if(ar.succeeded()) {
+                    .listen(HTTP_PORT, http -> {
+                        if(http.succeeded()) {
+                            discovery.publish(
+                                HttpEndpoint.createRecord("richiesteapi", "127.0.0.1", HTTP_PORT, "/"),
+                                ar -> {
+                                if (ar.succeeded()) {
+                                    startPromise.complete();
+                                    LOG.info("HTTP server started on port {}",HTTP_PORT);
+                                    //LOG.info("Service published on port 8303");
+                                } else {
+                                    startPromise.fail(ar.cause());
+                                }
+                                }
+                            );
                             LOG.info("HTTP server running on port {}", HTTP_PORT);
-                            startPromise.complete();
+                            //startPromise.complete();
                         } else {
-                            LOG.error("Could not start a HTTP server", ar.cause());
-                            startPromise.fail(ar.cause());
+                            LOG.error("Could not start a HTTP server", http.cause());
+                            startPromise.fail(http.cause());
                         }
                     });
                 }

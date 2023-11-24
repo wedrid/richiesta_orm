@@ -13,7 +13,7 @@ paths:
         '200':
           description: OK
 
-  /reqapi/richieste/open:
+  /richieste/open:
     get: 
       summary: Get all open richieste
       operationId: getAllOpenRichieste
@@ -21,7 +21,7 @@ paths:
         '200':
           description: OK
       
-  /reqapi/richieste:
+  /richieste:
     get:
       summary: Get all richieste
       operationId: getAllRichieste
@@ -34,7 +34,7 @@ paths:
       responses:
         '201':
           description: Created
-  /reqapi/richieste/{richiestaId}:
+  /richieste/{richiestaId}:
     get:
       summary: Get a richiesta by ID
       operationId: getRichiestaById
@@ -75,7 +75,7 @@ paths:
       responses:
         '204':
           description: No Content
-  /reqapi/tratta:
+  /tratta:
     get:
       summary: Get all tratta
       operationId: getAllTratta
