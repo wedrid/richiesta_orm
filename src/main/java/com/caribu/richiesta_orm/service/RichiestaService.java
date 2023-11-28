@@ -9,7 +9,7 @@ import com.caribu.richiesta_orm.model.RichiestaDTO;
 
 import io.vertx.core.Future;
 
-public class RichiestaService {
+public class RichiestaService implements RichiestaServiceInterface{
     private SessionFactory sessionFactory;
     public RichiestaService(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;

@@ -15,7 +15,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.net.impl.pool.Task;
 
-public class TrattaService {
+public class TrattaService implements TrattaServiceInterface{
     private final SessionFactory sessionFactory;
     private Vertx vertx;
     

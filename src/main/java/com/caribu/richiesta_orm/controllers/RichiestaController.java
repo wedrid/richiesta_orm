@@ -6,7 +6,9 @@ import com.caribu.richiesta_orm.model.RichiestaDTO;
 import com.caribu.richiesta_orm.model.Tratta;
 import com.caribu.richiesta_orm.model.TrattaDTO;
 import com.caribu.richiesta_orm.service.RichiestaService;
+import com.caribu.richiesta_orm.service.RichiestaServiceInterface;
 import com.caribu.richiesta_orm.service.TrattaService;
+import com.caribu.richiesta_orm.service.TrattaServiceInterface;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
@@ -14,10 +16,10 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 
 public class RichiestaController {
-    private RichiestaService richiestaService;
-    private TrattaService trattaService;
+    private RichiestaServiceInterface richiestaService;
+    private TrattaServiceInterface trattaService;
 
-    public RichiestaController(RichiestaService richiestaService, TrattaService trattaService) {
+    public RichiestaController(RichiestaServiceInterface richiestaService, TrattaServiceInterface trattaService) {
         this.richiestaService = richiestaService;
         this.trattaService = trattaService;
     }

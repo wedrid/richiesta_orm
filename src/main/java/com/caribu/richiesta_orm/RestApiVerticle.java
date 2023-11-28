@@ -7,7 +7,9 @@ import org.slf4j.LoggerFactory;
 import com.caribu.richiesta_orm.controllers.RichiestaController;
 import com.caribu.richiesta_orm.controllers.TrattaController;
 import com.caribu.richiesta_orm.service.RichiestaService;
+import com.caribu.richiesta_orm.service.RichiestaServiceInterface;
 import com.caribu.richiesta_orm.service.TrattaService;
+import com.caribu.richiesta_orm.service.TrattaServiceInterface;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
@@ -25,8 +27,8 @@ public class RestApiVerticle extends AbstractVerticle{
     private SessionFactory sessionFactory;
     private ServiceDiscovery discovery;
 
-    private TrattaService trattaService;
-    private RichiestaService richiestaService;
+    private TrattaServiceInterface trattaService;
+    private RichiestaServiceInterface richiestaService;
 
     private TrattaController trattaController;
     private RichiestaController richiestaController;

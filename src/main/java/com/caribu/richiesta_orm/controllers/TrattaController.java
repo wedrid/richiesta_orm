@@ -5,13 +5,14 @@ import java.time.LocalDateTime;
 import com.caribu.richiesta_orm.model.Tratta;
 import com.caribu.richiesta_orm.model.TrattaDTO;
 import com.caribu.richiesta_orm.service.TrattaService;
+import com.caribu.richiesta_orm.service.TrattaServiceInterface;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 
 public class TrattaController {
-    private TrattaService trattaService;
-    public TrattaController(TrattaService trattaService) {
+    private TrattaServiceInterface trattaService;
+    public TrattaController(TrattaServiceInterface trattaService) {
         this.trattaService = trattaService;
     }
     public void addNewTratta(RoutingContext context) {

@@ -1,1 +1,1 @@
-GET http://127.0.0.1:10001/richiesteapi/richieste/352 HTTP/1.1
+GET http://127.0.0.1:10001/richieste/352 HTTP/1.1
