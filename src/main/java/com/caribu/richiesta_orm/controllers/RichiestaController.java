@@ -29,7 +29,7 @@ public class RichiestaController {
         JsonObject body = context.body().asJsonObject();
         System.out.println("Ecco il body: " + body.toString());
         // 1. Transform the json to DTO
-        //retrieve the tratta from the db 
+        //retrieve the tratta from the db
         Future<Optional<Tratta>> trattaFuture = trattaService.getTrattaById(body.getInteger("tratta_id"));
         System.out.println("Before onComplete");
         trattaFuture.onComplete(ar -> {
@@ -41,9 +41,12 @@ public class RichiestaController {
                     // TODO: Convert the trattaDTO into Tratta using the mapper, then add richiesta.. 
                     System.out.println("Tratta id: " + tratta.getId());
                     System.out.println("Tratta object: " + tratta.toString());
+                    // get the cliente name, get the id from the other microservice
+                    
                     RichiestaDTO richiestaDTO = new RichiestaDTO(
                         null, //id 
                         body.getInteger("cliente_id"), 
+                        body.getString("nome_cliente"),
                         tratta, //tratta TODO: add tratta 
                         body.getInteger("operativo_id"), 
                         false, //default accepted false, then can be accepted later 

@@ -16,6 +16,8 @@ public class RichiestaService implements RichiestaServiceInterface{
     }
 
     public Future<RichiestaDTO> addRichiesta(RichiestaDTO richiestaDTO) {
+        // Da richiesta DTO estrai il company name e chiama il micro servizio filiale per ricevere l'ID
+        
         Richiesta richiestaEntity = new RichiestaEntityMapper().apply(richiestaDTO);
         CompletionStage<Void> result = sessionFactory.withTransaction((s, t) -> s.persist(richiestaEntity));
         RichiestaDTOMapper dtoMapper = new RichiestaDTOMapper(); 

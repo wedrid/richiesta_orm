@@ -9,12 +9,22 @@ public class RichiestaDTO {
     private Integer idCliente;
     private Tratta tratta;
     private Integer idOperativo;
+    private String nomeCliente;
 
+
+    public String getnomeCliente() {
+        return nomeCliente;
+    }
+
+    public void setnomeCliente(String nomeCliente) {
+        this.nomeCliente = nomeCliente;
+    }
 
     private boolean accepted;
 
-    public RichiestaDTO(Integer id, Integer idCliente, Tratta tratta, Integer idOperativo, boolean accepted, LocalDateTime createdAt) {
+    public RichiestaDTO(Integer id, Integer idCliente, String nomeCliente, Tratta tratta, Integer idOperativo, boolean accepted, LocalDateTime createdAt) {
         this.idCliente = idCliente;
+        this.nomeCliente = nomeCliente;
         this.tratta = tratta;
         this.idOperativo = idOperativo;
         this.accepted = accepted;
@@ -86,6 +96,7 @@ public class RichiestaDTO {
     public JsonObject toJson() {
         JsonObject json = new JsonObject();
         json.put("id", this.id);
+        json.put("nomeCliente", this.nomeCliente);
         json.put("idCliente", this.idCliente);
         json.put("tratta", this.tratta.toJson());
         json.put("idOperativo", this.idOperativo);
