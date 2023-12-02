@@ -62,6 +62,7 @@ public class MainVerticle extends AbstractVerticle {
      // credentials
     hibernateProps.put("hibernate.connection.username", "reqormuser");
     hibernateProps.put("hibernate.connection.password", "secret");
+    hibernateProps.put("hibernate.hbm2ddl.auto", "update");
 
     hibernateProps.put("javax.persistence.schema-generation.database.action", "create");
     //hibernateProps.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL95Dialect");

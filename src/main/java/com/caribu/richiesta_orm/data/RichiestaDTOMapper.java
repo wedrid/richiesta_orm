@@ -12,6 +12,7 @@ public class RichiestaDTOMapper implements Function<Richiesta, RichiestaDTO>{
         return new RichiestaDTO(
             request.getId(),
             request.getIdCliente(), 
+            null,
             request.getTratta(),
             request.getIdOperativo(), 
             request.isAccepted(), 

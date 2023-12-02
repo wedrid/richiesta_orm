@@ -17,6 +17,7 @@ import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
+import io.vertx.ext.web.client.WebClient;
 import io.vertx.ext.web.openapi.RouterBuilder;
 import io.vertx.servicediscovery.ServiceDiscovery;
 import io.vertx.servicediscovery.types.HttpEndpoint;
@@ -26,6 +27,7 @@ public class RestApiVerticle extends AbstractVerticle{
     public static final int HTTP_PORT = 10001;
     private SessionFactory sessionFactory;
     private ServiceDiscovery discovery;
+    private WebClient webClient;
 
     private TrattaServiceInterface trattaService;
     private RichiestaServiceInterface richiestaService;
@@ -64,11 +66,12 @@ public class RestApiVerticle extends AbstractVerticle{
         // });
         // server.requestHandler(router).listen(HTTP_PORT).onSuccess(result -> startPromise.complete())
         //     .onFailure(err -> startPromise.fail(err));
+        webClient = WebClient.create(vertx);
         System.out.println("Instanciated service discovery");
         discovery = ServiceDiscovery.create(vertx);
         System.out.println("Injecting dependencies: ");
         trattaService = new TrattaService(sessionFactory, vertx); // vertx dependency is needed for the event bus 
-        richiestaService = new RichiestaService(sessionFactory);
+        richiestaService = new RichiestaService(sessionFactory, this.webClient, this.discovery);
         System.out.println("Starting http server and attaching routes");
         startHttpServerAndAttachRoutes(startPromise);
     }
@@ -85,7 +88,7 @@ public class RestApiVerticle extends AbstractVerticle{
                 
                 // qui definisco controllers per una questione di organizzazione logica del codice
                 trattaController = new TrattaController(trattaService);
-                richiestaController = new RichiestaController(richiestaService, trattaService);
+                richiestaController = new RichiestaController(richiestaService, trattaService, vertx);
 
                 routerBuilder.operation("addNewTratta").handler(ctx -> trattaController.addNewTratta(ctx));
                 routerBuilder.operation("createNewRichiesta").handler(ctx -> richiestaController.addRichiesta(ctx));

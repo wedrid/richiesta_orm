@@ -12,6 +12,7 @@ public class RichiestaEntityMapper implements Function<RichiestaDTO, Richiesta>{
         Richiesta request = new Richiesta();
         request.setId(reqDTO.getId());
         request.setIdCliente(reqDTO.getIdCliente());
+        //request.setNomeCliente(reqDTO.getNomeCliente());
         request.setIdOperativo(reqDTO.getIdOperativo());
         request.setAccepted(reqDTO.isAccepted());
         request.setDataInserimento(reqDTO.getCreatedAt());

@@ -8,6 +8,10 @@ public class TrattaDTO {
     private Integer id;
     private Float origLat;
     private Float origLon;
+    private Float destLat;
+    private Float destLon;
+    
+    private LocalDateTime dataInserimento;
     public Float getOrigLat() {
         return origLat;
     }
@@ -23,7 +27,6 @@ public class TrattaDTO {
     public void setOrigLon(Float origLon) {
         this.origLon = origLon;
     }
-    private Float destLat;
     public Float getorigLat() {
         return origLat;
     }
@@ -55,8 +58,7 @@ public class TrattaDTO {
     public void setDestLon(Float destLon) {
         this.destLon = destLon;
     }
-    private Float destLon;
-    private LocalDateTime dataInserimento;
+    
     public TrattaDTO(Integer id, Float origLat, Float origLon, Float destLat, Float destLon, LocalDateTime dataInserimento) {
         this.id = id;
         this.origLat = origLat;

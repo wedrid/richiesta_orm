@@ -15,6 +15,8 @@ public class Richiesta {
     @Id @GeneratedValue
     private Integer id;
     private Integer idCliente;
+    //private String nomeCliente; non è corretto che ci sia il nome
+
     private Integer idOperativo; 
     private boolean accepted;
     @ManyToOne @JoinColumn(name="trattaId", nullable=true)
@@ -32,6 +34,14 @@ public class Richiesta {
     public void setId(Integer id){
         //this.id = id;
     }
+
+    // public String getNomeCliente() {
+    //     return nomeCliente;
+    // }
+
+    // public void setNomeCliente(String nomeCliente) {
+    //     this.nomeCliente = nomeCliente;
+    // }
 
     public Integer getId(){
         return id;

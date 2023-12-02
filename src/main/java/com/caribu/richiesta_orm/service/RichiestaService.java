@@ -30,7 +30,7 @@ public class RichiestaService implements RichiestaServiceInterface{
         // #### get the cliente name, ask the filiale microservice the id of the client in order to get the FK
         String clientName = richiestaDTO.getNomeCliente();
         
-        Future<JsonObject> httpFuture = webClient.get(10005, "127.0.0.1", "/clientid/" + clientName)
+        Future<JsonObject> httpFuture = webClient.get(8888, "127.0.0.1", "/filialeapi/clientid/" + clientName)
             .send()
             .compose(response -> {
                 System.out.println(response.bodyAsString());

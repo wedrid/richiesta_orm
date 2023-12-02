@@ -14,14 +14,17 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
+import io.vertx.ext.web.client.WebClient;
+import io.vertx.servicediscovery.ServiceDiscovery;
 
 public class RichiestaController {
     private RichiestaServiceInterface richiestaService;
     private TrattaServiceInterface trattaService;
 
-    public RichiestaController(RichiestaServiceInterface richiestaService, TrattaServiceInterface trattaService) {
+    public RichiestaController(RichiestaServiceInterface richiestaService, TrattaServiceInterface trattaService, Vertx vertx) {
         this.richiestaService = richiestaService;
         this.trattaService = trattaService;
+        
     }
 
     public void addRichiesta(RoutingContext context) {
@@ -41,12 +44,11 @@ public class RichiestaController {
                     // TODO: Convert the trattaDTO into Tratta using the mapper, then add richiesta.. 
                     System.out.println("Tratta id: " + tratta.getId());
                     System.out.println("Tratta object: " + tratta.toString());
-                    // get the cliente name, get the id from the other microservice
-                    
+
                     RichiestaDTO richiestaDTO = new RichiestaDTO(
                         null, //id 
-                        body.getInteger("cliente_id"), 
-                        body.getString("nome_cliente"),
+                        null, 
+                        body.getString("cliente_name"),
                         tratta, //tratta TODO: add tratta 
                         body.getInteger("operativo_id"), 
                         false, //default accepted false, then can be accepted later 

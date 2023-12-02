@@ -12,11 +12,11 @@ public class RichiestaDTO {
     private String nomeCliente;
 
 
-    public String getnomeCliente() {
+    public String getNomeCliente() {
         return nomeCliente;
     }
 
-    public void setnomeCliente(String nomeCliente) {
+    public void setNomeCliente(String nomeCliente) {
         this.nomeCliente = nomeCliente;
     }
 
