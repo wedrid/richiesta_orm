@@ -1,8 +1,8 @@
-POST http://127.0.0.1:10001/richieste HTTP/1.1
+POST http://127.0.0.1:8888/richiesteapi/richieste HTTP/1.1
 Content-Type: application/json
 
 {
-    "cliente_name": "plutino", 
+    "cliente_name": "plutewrino", 
     "operativo_id": 1, 
     "tratta_id": 301, 
     "accepted": false 
