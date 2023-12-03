@@ -10,8 +10,10 @@ import com.caribu.richiesta_orm.service.RichiestaServiceInterface;
 import com.caribu.richiesta_orm.service.TrattaService;
 import com.caribu.richiesta_orm.service.TrattaServiceInterface;
 
+import io.netty.handler.codec.http.HttpHeaderValues;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
+import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.client.WebClient;
@@ -62,8 +64,22 @@ public class RichiestaController {
                             //responseBody.put("Status", "Okay!!");
                             System.out.println("Successo 3");
                             //context.response().end(new JsonObject().put("message", "OK").toString());
-                            context.response().setStatusCode(201).end();
+                            
+                            
+                            //context.response().setStatusCode(201).end();
+                            try {
+                                JsonObject responseBody = new JsonObject().put("message", "ok");
+                                context.response()
+                                    .putHeader("Content-Type", "application/json")
+                                    .setStatusCode(201)
+                                    .end(responseBody.encode());
+                                System.out.println("Sent status ok. ");
+                             } catch (Exception e) {
+                                System.err.println("Error sending response: " + e.getMessage());
+                                e.printStackTrace();
+                             }
                             })
+                            
                         .onFailure(err -> {
                             System.out.println("Errore");
                             System.out.println(err.getMessage());

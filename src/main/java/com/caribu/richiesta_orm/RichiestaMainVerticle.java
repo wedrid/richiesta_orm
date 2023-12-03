@@ -21,9 +21,9 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.core.spi.cluster.ClusterManager;
 import io.vertx.spi.cluster.hazelcast.HazelcastClusterManager;
 
-public class MainVerticle extends AbstractVerticle {
+public class RichiestaMainVerticle extends AbstractVerticle {
 
-  private static final Logger LOG = LoggerFactory.getLogger(MainVerticle.class);
+  private static final Logger LOG = LoggerFactory.getLogger(RichiestaMainVerticle.class);
   public static final int PORT = 10001;
   public static final int PROCESSORS = 1; //Runtime.getRuntime().availableProcessors();
   private static ServiceRegistry serviceRegistry;
@@ -32,7 +32,7 @@ public class MainVerticle extends AbstractVerticle {
   @Override
   public void start(Promise<Void> startPromise) throws Exception {
     //TODO: check correctness
-    LOG.info("Starting {} with {} processors", MainVerticle.class.getSimpleName(), PROCESSORS);
+    LOG.info("Starting {} with {} processors", RichiestaMainVerticle.class.getSimpleName(), PROCESSORS);
     deployRestApiVerticle(startPromise);
   }
 
@@ -97,7 +97,7 @@ public class MainVerticle extends AbstractVerticle {
     Vertx
       .clusteredVertx(options, cluster -> {
        if (cluster.succeeded()) {
-           cluster.result().deployVerticle(new MainVerticle(), res -> {
+           cluster.result().deployVerticle(new RichiestaMainVerticle(), res -> {
                if(res.succeeded()){
                    LOG.info("Deployment id is: " + res.result());
                } else {
