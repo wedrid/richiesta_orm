@@ -59,7 +59,7 @@ public class RichiestaMainVerticle extends AbstractVerticle {
     Properties hibernateProps = new Properties();
     hibernateProps.put("hibernate.connection.url", "jdbc:postgresql://localhost:5432/requestorm");
    
-     // credentials
+    // credentials
     hibernateProps.put("hibernate.connection.username", "reqormuser");
     hibernateProps.put("hibernate.connection.password", "secret");
     hibernateProps.put("hibernate.hbm2ddl.auto", "update");
@@ -82,7 +82,6 @@ public class RichiestaMainVerticle extends AbstractVerticle {
     Config hazelcastConfig = new Config();
     hazelcastConfig.getNetworkConfig().setPort(6000) // Set the initial port for clustering
               .setPortAutoIncrement(true);
-
     NetworkConfig networkConfig = hazelcastConfig.getNetworkConfig();
 
     // Network configurations for discovery over TCP/IP instead of multicast

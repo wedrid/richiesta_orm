@@ -34,6 +34,17 @@ paths:
       responses:
         '201':
           description: Created
+          
+  /richiesteCliente: 
+    post: 
+      summary: Create a new richiesta, customer name is provided
+      operationId: createNewRichiestaCliente
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+
   /richieste/{richiestaId}:
     get:
       summary: Get a richiesta by ID

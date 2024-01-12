@@ -89,11 +89,11 @@ public class RestApiVerticle extends AbstractVerticle{
                 // qui definisco controllers per una questione di organizzazione logica del codice
                 trattaController = new TrattaController(trattaService);
                 richiestaController = new RichiestaController(richiestaService, trattaService, vertx);
-
+                
                 routerBuilder.operation("addNewTratta").handler(ctx -> trattaController.addNewTratta(ctx));
                 routerBuilder.operation("createNewRichiesta").handler(ctx -> richiestaController.addRichiesta(ctx));
                 routerBuilder.operation("getRichiestaById").handler(ctx -> richiestaController.getRichiestaById(ctx));
-                
+                routerBuilder.operation("createNewRichiestaCliente").handler(ctx -> richiestaController.addRichiestaUsingCustomerName(ctx));
 
                 Router restApi = routerBuilder.createRouter();
 
